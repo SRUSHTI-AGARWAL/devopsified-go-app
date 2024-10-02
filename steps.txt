@@ -42,9 +42,10 @@ Pre's
     - docker image push
     - update helm
 >CD - ArgoCD , it will pull the helm chart and deploy it on the K8s cluster.
-
-
-
+after argoCD is installed, its service is exposed as Loadbalancer type so it 
+is accessible as UI on browser. 
+usage: 1. LB IP directly. 2. http://<nodeport-ip>:<argoCD-service-port>
+UI: AutoHeal: for any wrong change done by any user in manifests, argoCD with automatically identify & fix those cha
 issues faced: 
 
 1.distroless images version 
@@ -59,3 +60,21 @@ Explaination: when public IP is used to access the ec2 on web browser, it sends 
 Web-server like nginx or apapche, listens to the requests on port and serves the content in the default location. 
 apache: /var/wwww/html/index.html
 nginx: /usr/bin/share/
+4. Endpoint issue with service
+
+5. Git issues : 
+
+- Push Rejected: 
+error message: "Updates were rejected because the remote contains work that you do
+not have locally. This is usually caused by another repository pushing to 
+the same ref"
+sol- git pull origin main   # pull latest change from remote to local
+ resolve any merge conflicts 
+ git push origin main
+
+- NOT a git repo: current dir is not initialised
+
+- Unrelated histories: 
+message: fatal: refusing to merge unrelated histories 
+cause: Attempting to merge branches  that do not share a common commit.
+sol- git pull origin main --allow-unrelated-histories
