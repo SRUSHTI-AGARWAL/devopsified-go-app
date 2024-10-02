@@ -1,16 +1,14 @@
-name: CI/CD
-
 #naming workflow
 name: Continous Integration
 # providing build-triggers(like jenkins)
 on: 
   push:
     branches:
-    - main
+      - main
     paths-ignore:
-    - 'helm/**'
-    - 'k8s/**'
-    - 'README.md'
+      - 'helm/**'
+      - 'k8s/**'
+      - 'README.md'
 
 
 # build stage: need to provide a VM or container with an ubuntu image where github actions will run this particular 
@@ -28,8 +26,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Go 1.22
-      uses: actions/setup-go@v2
+    - name: Set up Go 1.23
+      uses: actions/setup-go@v3
       with:
         go-version: 1.23
 
