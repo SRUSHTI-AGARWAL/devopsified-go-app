@@ -4,11 +4,11 @@ name: Continous Integration
 on: 
   push:
     branches:
-      - main
+    - main
     paths-ignore:
-      - 'helm/**'
-      - 'k8s/**'
-      - 'README.md'
+    - 'helm/**'
+    - 'k8s/**'
+    - 'README.md'
 
 
 # build stage: need to provide a VM or container with an ubuntu image where github actions will run this particular 
