@@ -1,0 +1,61 @@
+#application source code, unit-test cases code, static content and steps to run
+#the app. 
+
+#devOps pracs
+1- containerize -> docker > k8  manifests( deploy, ingress, service) 
+2- CI (pipelines, GitHub actions)  
+3- CD (GitOps(ArgoCD))
+
+4-After CI/CD , application has to be deployed on target i.e K8s cluster-EKS.
+
+5- Helm chart for application - to deploy an application in mutiple env ,
+instead of writing manifests for each environment( dev, QA, prod, test) 
+create helm chart and pass values.yaml
+
+6- ingress controller config, which will create a LB depending on ingress config. so that app is exposed to outside world. 
+7- mapping LB IP address to local DNS , if app is accessed externally
+
+
+Pre's
+- how the app should be built and run - build the binary and execute or directly run the application. 
+- port on which App is running: port is 8080 
+- how does app look like - static HTML webpage
+================================================================
+>clone repo
+>BUILD the application 
+>RUN the app locally and check if application is accessible 
+>create DOCKERFILE and try to optimize it. (base images, then, distroless images build for security & reduced size)
+- here i will try to create a docker file with multi-stage docker builds, distroless images for reduced size and security. 
+>build the image using file
+>push image to docker docker-hub
+
+>writing K8s manifests
+>create a K8s cluster(cloud-managed or local) either through cmd or through terraform 
+>deploy the manifests : deployment, service, ingress
+>ingress-controller
+>DNS mapping 
+> try access the app using domain name and port.
+>helm charts. 
+>CI : using Github actions
+    - Build and test(UI),
+    - static code Analysis
+    - docker image push
+    - update helm
+>CD - ArgoCD , it will pull the helm chart and deploy it on the K8s cluster.
+
+
+
+issues faced: 
+
+1.distroless images version 
+2.aws account security group issues - 
+ -cause: ssh was being denied from anywhere and was only allowed from the 
+instances with the same security group. this result is failure of SSH using  Ec2 instance connect. 
+- solution: made changes to default security group and added 3 inbound rules
+for ports 22,80,443 all with source as anywhere IPs. 
+3.Understood that a web-server is required to serve any web-content on web 
+and access it using public IP. 
+Explaination: when public IP is used to access the ec2 on web browser, it sends the HTTP request on port 80.
+Web-server like nginx or apapche, listens to the requests on port and serves the content in the default location. 
+apache: /var/wwww/html/index.html
+nginx: /usr/bin/share/
