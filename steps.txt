@@ -46,7 +46,8 @@ after argoCD is installed, its service is exposed as Loadbalancer type so it
 is accessible as UI on browser. 
 usage: 1. LB IP directly. 2. http://<nodeport-ip>:<argoCD-service-port>
 UI: AutoHeal: for any wrong change done by any user in manifests, argoCD with automatically identify & fix those cha
-issues faced: 
+
+=>issues faced: 
 
 1.distroless images version 
 2.aws account security group issues - 

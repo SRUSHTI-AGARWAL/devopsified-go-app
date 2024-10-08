@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: go-web-app
-        image: imsrushti/go-web-app:v1
+        image: imsrushti/golang-web-app:v1
         ports:
         - containerPort: 80
 
